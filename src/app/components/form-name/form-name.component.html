@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" placeholder="Name" formControlName="name" required>
+      <mat-error *ngIf="form.get('name')!.invalid">Name is invalid</mat-error>
+    </mat-form-field>
+    <!--here I have null value at the start and value in quotes-->
+    <!--<span>{{ form.controls['name'].valueChanges | async | json }}</span>-->
+    <span>{{ formNameValue | async }}</span>
+  </div>
+</form>
