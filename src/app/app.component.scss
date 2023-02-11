@@ -3,15 +3,19 @@
   padding: 30px;
   box-sizing: border-box;
   background-color: #EEEEEE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .box {
   display: flex;
   width: 100%;
   justify-content: center;
 
   &-card {
-    max-width: 500px;
-    height: 500px;
+    max-width: 400px;
+    height: 400px;
     width: 100%;
   }
 
@@ -33,4 +37,8 @@
     text-align: center;
     padding-top: 30px;
   }
+}
+
+.mat-tab-label {
+  width: 50% !important;
 }
