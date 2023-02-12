@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import {Router} from "@angular/router";
+import {MatTabChangeEvent} from "@angular/material/tabs";
 
 @Component({
   selector: 'app-auth-form',
@@ -37,7 +38,9 @@ export class AuthFormComponent {
     }
   }
 
-  test() {
-    console.log('test')
+  changeCard(event: MatTabChangeEvent) {
+    if(event.index === 1) {
+      this._router.navigate(['/register'])
+    }
   }
 }

@@ -12,4 +12,8 @@ export class AuthenticationService {
   login(data: AuthModel<AuthDataModel>): Observable<AuthDataModel> {
     return this._httpClient.post<AuthDataModel>('https://us-central1-courses-auth.cloudfunctions.net/auth/login', data );
   }
+
+  register(data: Object): Observable<AuthDataModel> {
+    return this._httpClient.post<AuthDataModel>('https://us-central1-courses-auth.cloudfunctions.net/auth/register', JSON.stringify(data) );
+  }
 }
