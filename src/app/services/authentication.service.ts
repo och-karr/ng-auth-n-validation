@@ -10,7 +10,6 @@ export class AuthenticationService {
   }
 
   register(data: AuthModel<AuthDataModel>): Observable<AuthDataModel> {
-    console.log(data)
-    return this._httpClient.post<AuthDataModel>('https://us-central1-courses-auth.cloudfunctions.net/auth/register', JSON.stringify(data) );
+    return this._httpClient.post<AuthDataModel>('https://us-central1-courses-auth.cloudfunctions.net/auth/register', data );
   }
 }

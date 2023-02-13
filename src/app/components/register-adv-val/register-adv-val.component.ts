@@ -31,13 +31,10 @@ export const isDateOk: ValidatorFn = (
   const isLeapYear = new Date(+year, 1, 29).getDate() === 29;
 
   if (day && month && year && !is31DaysMonth && month !== 2 && day >= 30) {
-    console.log('1')
     return { isDateOk: 'day for this month must be less or equal than 30' };
   } else if (day && month && year && !is31DaysMonth && month === 2 && !isLeapYear && day >= 28) {
-    console.log('2')
     return { isDateOk: 'day for this month must be less or equal than 28' };
   } else if (day && month && year && !is31DaysMonth && month === 2 && isLeapYear && day >= 29) {
-    console.log('3')
     return { isDateOk: 'day for this month must be less or equal than 29' };
   }
 
@@ -53,26 +50,32 @@ export const isDateOk: ValidatorFn = (
 })
 export class RegisterAdvValComponent {
 
-  readonly registerForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^*()])[A-Za-z\\d!@#$%^*()]{6,}$')]),
-    repeatedPassword: new FormControl('', Validators.required),
+  readonly birthDate: FormGroup = new FormGroup({
     day: new FormControl('', [Validators.required, Validators.min(1), Validators.max(31)]),
     month: new FormControl('', [Validators.required, Validators.min(1), Validators.max(12)]),
-    year: new FormControl('', Validators.required),
-  }, {validators: [doPasswordsMatch, isDateOk]});
+    year: new FormControl('', [Validators.required, Validators.min(new Date().getFullYear() - 100), Validators.max(new Date().getFullYear())]),
+  }, {validators: [isDateOk]})
+
+  readonly passwords: FormGroup = new FormGroup({
+    password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^*()])[A-Za-z\\d!@#$%^*()]{6,}$')]),
+    repeatedPassword: new FormControl('', Validators.required)
+    }, {validators: [doPasswordsMatch]})
+
+  readonly registerForm: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    passwords: this.passwords,
+    birthDate: this.birthDate
+  });
 
   constructor(private _authenticationService: AuthenticationService, private _router: Router) {
   }
 
-  onRegisterFormSubmitted(form: FormGroup): void {
-    console.log(form)
-    if (form.valid) {
-      console.log('valid')
+  onRegisterFormSubmitted(regForm: FormGroup, passForm: FormGroup): void {
+    if (regForm.valid) {
       this._authenticationService.register({
         data: {
-          email: form.value.email,
-          password: form.value.password
+          email: regForm.value.email,
+          password: passForm.value.password
         }
       }).subscribe({
         next: () => {
