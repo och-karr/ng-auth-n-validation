@@ -30,17 +30,13 @@ export const isDateOk: ValidatorFn = (
   const is31DaysMonth = [1,3,5,7,8,10,12].includes(+month);
   const isLeapYear = new Date(+year, 1, 29).getDate() === 29;
 
-  console.log('is31DaysMonth: ' + is31DaysMonth)
-  console.log('isLeapYear: ' + isLeapYear)
-  console.log('type of month: ' + typeof month)
-
-  if (day && month && year && !is31DaysMonth && month !== 2) {
+  if (day && month && year && !is31DaysMonth && month !== 2 && day >= 30) {
     console.log('1')
     return { isDateOk: 'day for this month must be less or equal than 30' };
-  } else if (day && month && year && !is31DaysMonth && month === 2 && !isLeapYear) {
+  } else if (day && month && year && !is31DaysMonth && month === 2 && !isLeapYear && day >= 28) {
     console.log('2')
     return { isDateOk: 'day for this month must be less or equal than 28' };
-  } else if (day && month && year && !is31DaysMonth && month === 2 && isLeapYear) {
+  } else if (day && month && year && !is31DaysMonth && month === 2 && isLeapYear && day >= 29) {
     console.log('3')
     return { isDateOk: 'day for this month must be less or equal than 29' };
   }
