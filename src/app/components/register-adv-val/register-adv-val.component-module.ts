@@ -7,6 +7,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatInputModule,
     CommonModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCheckboxModule
   ],
   declarations: [RegisterAdvValComponent],
   providers: [],

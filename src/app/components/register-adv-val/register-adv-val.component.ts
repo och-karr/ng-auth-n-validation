@@ -54,6 +54,7 @@ export class RegisterAdvValComponent {
     day: new FormControl('', [Validators.required, Validators.min(1), Validators.max(31)]),
     month: new FormControl('', [Validators.required, Validators.min(1), Validators.max(12)]),
     year: new FormControl('', [Validators.required, Validators.min(new Date().getFullYear() - 100), Validators.max(new Date().getFullYear())]),
+    dateValTurnedOn: new FormControl(true)
   }, {validators: [isDateOk]})
 
   readonly passwords: FormGroup = new FormGroup({
@@ -68,6 +69,13 @@ export class RegisterAdvValComponent {
   });
 
   constructor(private _authenticationService: AuthenticationService, private _router: Router) {
+    this.birthDate.get('dateValTurnedOn')?.valueChanges.subscribe(isChecked => {
+      if (isChecked) {
+        this.birthDate.addValidators([isDateOk]);
+      } else {
+        this.birthDate.removeValidators([isDateOk]);
+      }
+    })
   }
 
   onRegisterFormSubmitted(regForm: FormGroup, passForm: FormGroup): void {
