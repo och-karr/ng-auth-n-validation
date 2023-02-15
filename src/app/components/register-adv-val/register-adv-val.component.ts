@@ -78,12 +78,12 @@ export class RegisterAdvValComponent {
     })
   }
 
-  onRegisterFormSubmitted(regForm: FormGroup, passForm: FormGroup): void {
+  onRegisterFormSubmitted(regForm: FormGroup): void {
     if (regForm.valid) {
       this._authenticationService.register({
         data: {
-          email: regForm.value.email,
-          password: passForm.value.password
+          email:  regForm.get('email')?.value,
+          password:  regForm.get('passwords')?.get('password')?.value
         }
       }).subscribe({
         next: () => {
