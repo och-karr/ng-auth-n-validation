@@ -18,6 +18,9 @@ import {ErrorComponentModule} from './components/error/error.component-module';
 import {AuthFormComponentModule} from './components/auth-form/auth-form.component-module';
 import {RegisterFormComponentModule} from './components/register-form/register-form.component-module';
 import {AuthFormBcndComponentModule} from './components/auth-form-bcnd/auth-form-bcnd.component-module';
+import {RegisterAdvValComponent} from './components/register-adv-val/register-adv-val.component';
+import {RegisterAdvValComponentModule} from './components/register-adv-val/register-adv-val.component-module';
+import {AuthenticationServiceModule} from './services/authentication.service-module';
 
 @NgModule({
   imports: [RouterModule.forRoot([{
@@ -39,7 +42,10 @@ import {AuthFormBcndComponentModule} from './components/auth-form-bcnd/auth-form
   }, {
     path: 'auth-bcnd',
     component: AuthFormBcndComponent
-  }]), FormNameComponentModule, FormAgeComponentModule, FormEmailComponentModule, FormCommentComponentModule, SuccessComponentModule, ErrorComponentModule, AuthFormComponentModule, RegisterFormComponentModule, AuthFormBcndComponentModule],
+  }, {
+    path: 'register-adv',
+    component: RegisterAdvValComponent
+  }]), FormNameComponentModule, FormAgeComponentModule, FormEmailComponentModule, FormCommentComponentModule, SuccessComponentModule, ErrorComponentModule, AuthFormComponentModule, RegisterFormComponentModule, AuthFormBcndComponentModule, RegisterAdvValComponentModule, AuthenticationServiceModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
